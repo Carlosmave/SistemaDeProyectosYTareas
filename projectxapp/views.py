@@ -54,7 +54,7 @@ def auth_logout(request):
 @login_required
 def inicio(request):
     return render(request, 'projectxapp/inicio.html')
-####################################PROYECTOS###################################
+####################################PROYECTOS##################################
 @login_required
 def proyectos(request):
     #Obtiene los nombres de los proyectos de la base de datos

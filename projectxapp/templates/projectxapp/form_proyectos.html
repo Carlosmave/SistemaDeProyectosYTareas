@@ -1,0 +1,57 @@
+{% extends "app/base.html" %}
+{% block titulo %}
+    CREAR PROYECTO
+{% endblock %}
+{% block contenido %}
+<div class="row">
+
+    <div class="col-md-12">
+      <div class="card card-user">
+        <div class="card-header">
+          <h5 class="card-title">Datos de la tarea</h5>
+        </div>
+        <div class="card-body">
+          <form method="POST" 
+                action="{% url 'crear_tarea' %}">
+                {% csrf_token %}
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Titulo</label>
+                  <input type="text" name="titulo" class="form-control" placeholder="Titulo de la tarea">
+                </div>
+              </div>
+            </div>
+              <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label>Desarrolladores</label>
+                      <input type="text" name="desarrolladores" class="form-control" placeholder="Desarrolladores">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>Proyecto</label>
+                        <select name="proyecto_id">
+                          {% for p in proyectos %}
+                          <option value="{{p.id}}">{{p.nombre_proyecto}}</option>
+                          {% endfor %}
+                        </select>
+                      </div>
+                    </div>
+                </div>
+            
+            <div class="row">
+              <div class="update ml-auto mr-auto">
+                <button type="submit" class="btn btn-primary btn-round">Crear tarea</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+  

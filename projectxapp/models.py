@@ -1,9 +1,16 @@
 from django.db import models
 from datetime import datetime
+from django.contrib.auth.models import User
 
 # Create your models here.
 
 #General Models
+
+
+
+class Worker(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    role = models.CharField(max_length=100)
 
 class Tarea(models.Model):
     titulo = models.CharField(max_length=500)

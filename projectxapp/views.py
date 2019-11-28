@@ -27,10 +27,15 @@ def auth_login(request):
 def crear_cuenta(request):
     if (request.method == 'POST' and 'registrar' in request.POST):
         username=request.POST.get('username', '')
-        email=request.POST.get('inputemail', '')
+        first_name=request.POST.get('first_name', '')
+        last_name=request.POST.get('last_name', '')
+        email=request.POST.get('email', '')
         password=request.POST.get('password', '')
-        user_obj = User(username=username, password=password, email=email)
+        role=request.POST.get('role', '')
+        user_obj = User(username=username, first_name=first_name, last_name=last_name, email=email, password=password)
         user_obj.save()
+        user_role = user_obj.worker(role=role)
+        user_role.save()
         return render(request, 'projectxapp/login.html')
     else:
         return render(request, 'projectxapp/register.html')

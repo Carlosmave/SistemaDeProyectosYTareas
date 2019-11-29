@@ -26,9 +26,10 @@ SECRET_KEY = '0$3^nw#%rs0^pt)v8e$j6t+r73jbxx9m&x+yqi*crxs@er7q&c'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', 'projectx.herokuapp.com']
+ALLOWED_HOSTS = ['localhost', 'proyectosytareas.herokuapp.com']
 
-
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # During development only
+# EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
 # Application definition
 
 INSTALLED_APPS = [
@@ -40,6 +41,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
+AUTH_USER_MODEL = 'projectxapp.User'
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -86,6 +91,8 @@ DATABASES = {
         'PORT': '5433',
     }
 }
+
+
 #Heroku
 #DATABASES = {
 #    'default': dj_database_url.config()
@@ -110,7 +117,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
+AUTHENTICATION_BACKENDS = (
+        'django.contrib.auth.backends.ModelBackend',
+    )
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
@@ -142,3 +151,13 @@ STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
+
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'proyectostareasemail@gmail.com'
+EMAIL_HOST_PASSWORD = 'czkioucdomsmscye'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'Equipo de ProyectosyTareas <noreply@cproyectosytareas.com>'
